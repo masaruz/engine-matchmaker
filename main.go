@@ -22,7 +22,7 @@ type session struct {
 type sessions map[string]session
 
 func createSession() session {
-	id := uuid.Must(uuid.NewV4()).String()
+	id := uuid.NewV4().String()
 	return session{
 		ID:      id,
 		Players: make(map[string]player)}
@@ -54,5 +54,5 @@ func main() {
 		sessions = make(map[string]session)
 	}).Methods("post")
 
-	log.Println(http.ListenAndServe(fmt.Sprintf(":%d", port), r))
+	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%d", port), r))
 }
